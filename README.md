@@ -21,6 +21,8 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 - ⚡ **Recherche croisée** entre technologies
 - 🎯 **38+ fichiers** de documentation (845 KB)
 - 🔄 **Mise à jour automatique** des sources
+- 🌐 **Mode HTTP avec SSE** - Interface web et API REST
+- 📡 **Mode stdio** traditionnel pour usage personnel
 
 ## 📚 Technologies supportées
 
@@ -48,6 +50,31 @@ npm run docs:update
 npm start
 ```
 
+## 🚀 Démarrage rapide
+
+### Mode stdio (recommandé pour usage personnel)
+```bash
+# 1. Installation et construction
+npm install && npm run build
+
+# 2. Téléchargement de la documentation
+npm run docs:download:complete
+
+# 3. Démarrage standalone
+npm start
+```
+
+### Mode HTTP (recommandé pour développement/équipe)
+```bash
+# 1. Installation et construction
+npm install && npm run build
+
+# 2. Démarrage serveur HTTP
+npm run start:http
+
+# 3. Interface web disponible à http://localhost:3001
+```
+
 ## 🎯 Utilisation avec GitHub Copilot
 
 Dans le chat GitHub Copilot, utilisez directement les commandes MCP :
@@ -64,18 +91,6 @@ Dans le chat GitHub Copilot, utilisez directement les commandes MCP :
 
 # Voir les catégories disponibles
 @mcp_fullstack-doc_get_categories technology="mysql"
-```
-
-## Utilisation
-
-### Démarrage du serveur
-```bash
-npm start
-```
-
-### Mode développement
-```bash
-npm run dev
 ```
 
 ## Outils disponibles
@@ -144,30 +159,6 @@ La configuration des technologies se trouve dans `src/config/technologies.json`.
 2. Modifiez la configuration si nécessaire
 3. Testez avec les outils MCP
 
-## 🚀 Démarrage rapide
-
-### Mode stdio (recommandé pour usage personnel)
-```bash
-# 1. Construction
-npm run build
-
-# 2. Démarrage standalone
-npm start
-```
-
-### Mode HTTP (recommandé pour développement/équipe)
-```bash
-# 1. Construction
-npm run build
-
-# 2. Démarrage serveur HTTP
-npm run start:http
-# ou avec port personnalisé
-node build/http-server.js 3001
-
-# 3. Interface web disponible à http://localhost:3001
-```
-
 ## 🌐 Modes de fonctionnement
 
 Ce serveur MCP supporte **deux modes** de communication :
@@ -187,6 +178,62 @@ Ce serveur MCP supporte **deux modes** de communication :
 
 > 📖 **Guide complet** : Voir [HTTP-SERVER-GUIDE.md](./HTTP-SERVER-GUIDE.md) pour tous les détails
 
+## ⚙️ Configuration
+
+La configuration des technologies se trouve dans `src/config/technologies.json`.
+
+### Configuration Claude Desktop
+
+**Mode stdio :**
+```json
+{
+  "mcpServers": {
+    "fullstack-docs": {
+      "command": "node",
+      "args": ["build/index.js"],
+      "cwd": "/path/to/mcp-fullstack-docs-server"
+    }
+  }
+}
+```
+
+**Mode HTTP :**
+```json
+{
+  "mcpServers": {
+    "fullstack-docs": {
+      "url": "http://localhost:3001/mcp",
+      "type": "sse"
+    }
+  }
+}
+```
+
+## 🤝 Contribution
+
+1. Ajoutez votre documentation dans le dossier `docs/`
+2. Modifiez la configuration si nécessaire
+3. Testez avec les outils MCP
+
 ## License
 
 MIT
+
+## 🆕 Nouveautés - Mode HTTP avec SSE
+
+🎉 **Nouvelle fonctionnalité majeure** : Le serveur MCP supporte maintenant le **mode HTTP avec Server-Sent Events** !
+
+### ✨ Avantages du mode HTTP :
+- 🌐 **Interface web** de diagnostic sur `http://localhost:3001`
+- 🔍 **API REST** pour tests (`/health`, `/api/technologies`, `/api/search`)
+- 👥 **Serveur partagé** - Une instance pour toute l'équipe
+- 🐛 **Débogage facile** - Logs centralisés et monitoring
+- 🌍 **Accès distant** - Utilisable via réseau
+
+### 🚀 Démarrage mode HTTP :
+```bash
+npm run start:http
+# Interface disponible sur http://localhost:3001
+```
+
+> 💡 **Conseil** : Utilisez le mode stdio pour l'usage personnel, et le mode HTTP pour le développement en équipe ou les tests
