@@ -26,16 +26,16 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 
 ## 📚 Technologies supportées
 
-| Technologie    | Version     | Fichiers    | Status              |
-| -------------- | ----------- | ----------- | ------------------- |
+| Technologie    | Version       | Fichiers    | Status                  |
+| -------------- | ------------- | ----------- | ----------------------- |
 | **Symfony**    | 6.4 LTS + 7.3 | 21 fichiers | ✅ Multi-versions GitHub |
-| **PHP**        | 8.2+        | 3 fichiers  | ✅ Exemples avancés  |
-| **MySQL**      | 8.0         | 8 fichiers  | ✅ Guide complet     |
-| **JavaScript** | ES2023      | 2 fichiers  | ✅ MDN officiel      |
-| **CSS**        | 3           | 2 fichiers  | ✅ Layouts modernes  |
-| **HTML**       | 5           | À venir     | 🔄 En développement  |
-| **Doctrine**   | 3.0         | 1 fichier   | ✅ ORM officiel      |
-| **Webpack**    | 5.89        | 1 fichier   | ✅ Configuration     |
+| **PHP**        | 8.2+          | 3 fichiers  | ✅ Exemples avancés      |
+| **MySQL**      | 8.0           | 8 fichiers  | ✅ Guide complet         |
+| **JavaScript** | ES2023        | 2 fichiers  | ✅ MDN officiel          |
+| **CSS**        | 3             | 2 fichiers  | ✅ Layouts modernes      |
+| **HTML**       | 5             | À venir     | 🔄 En développement      |
+| **Doctrine**   | 3.0           | 1 fichier   | ✅ ORM officiel          |
+| **Webpack**    | 5.89          | 1 fichier   | ✅ Configuration         |
 
 ### 📚 Versions Symfony supportées
 
