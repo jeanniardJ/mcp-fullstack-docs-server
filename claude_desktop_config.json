@@ -1,0 +1,13 @@
+{
+    "mcpServers": {
+        "fullstack-docs": {
+            "command": "node",
+            "args": [
+                "f:/GitHub/JJA-DEV/Mcp_local/mcp-fullstack-docs-server/build/index.js"
+            ],
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "name": "mcp-fullstack-docs-server",
+    "displayName": "Fullstack Documentation Server",
+    "description": "Serveur MCP pour la documentation Symfony, PHP, Doctrine, MySQL, JavaScript, HTML, CSS, Webpack",
+    "version": "1.0.0",
+    "publisher": "JJA-DEV",
+    "engines": {
+        "vscode": "^1.74.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
+    ],
+    "main": "./build/extension.js",
+    "contributes": {
+        "configuration": {
+            "title": "Fullstack Docs MCP Server",
+            "properties": {
+                "fullstackDocs.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Activer le serveur de documentation fullstack"
+                },
+                "fullstackDocs.serverPath": {
+                    "type": "string",
+                    "default": "./build/index.js",
+                    "description": "Chemin vers le serveur MCP"
+                },
+                "fullstackDocs.autoStart": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Démarrer automatiquement le serveur"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "fullstackDocs.searchDocs",
+                "title": "Rechercher dans la documentation",
+                "category": "Fullstack Docs"
+            },
+            {
+                "command": "fullstackDocs.listTechnologies",
+                "title": "Lister les technologies",
+                "category": "Fullstack Docs"
+            },
+            {
+                "command": "fullstackDocs.restart",
+                "title": "Redémarrer le serveur MCP",
+                "category": "Fullstack Docs"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run build",
+        "build": "tsc -p ./",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.74.0",
+        "@types/node": "^22.0.0",
+        "typescript": "^5.5.0"
+    },
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^0.4.0"
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "name": "mcp-fullstack-docs-server",
+    "version": "1.0.0",
+    "description": "Serveur MCP pour la documentation complète Symfony, PHP, HTML, CSS, Doctrine, MySQL, JavaScript et Webpack",
+    "type": "module",
+    "main": "build/index.js",
+    "scripts": {
+        "build": "tsc && npm run copy:config",
+        "copy:config": "powershell -c \"Copy-Item 'src/config' 'build/' -Recurse -Force\"",
+        "start": "node build/index.js",
+        "dev": "npm run build && node build/index.js",
+        "watch": "tsc --watch",
+        "test": "node test-complete.js",
+        "test:basic": "node test-basic.js",
+        "fix": "node fix-config.js",
+        "setup:vscode": "powershell -ExecutionPolicy Bypass -File setup-vscode.ps1",
+        "docs:serve": "node build/index.js",
+        "docs:download": "node scripts/download-symfony-simple.js",
+        "docs:download:full": "node scripts/download-symfony-docs.js",
+        "docs:download:ps": "powershell -ExecutionPolicy Bypass -File scripts/download-symfony-docs.ps1",
+        "docs:download:all": "node scripts/download-all-docs.js",
+        "docs:download:all:ps": "powershell -ExecutionPolicy Bypass -File scripts/download-all-docs.ps1",
+        "docs:generate": "node scripts/generate-all-docs.js",
+        "docs:generate:mysql": "node scripts/generate-mysql-docs.js",
+        "docs:report": "node scripts/report-documentation.js",
+        "docs:update": "npm run docs:download:all && npm run docs:generate && npm run build",
+        "docs:update:quick": "npm run docs:generate && npm run build"
+    },
+    "keywords": [
+        "mcp",
+        "model-context-protocol",
+        "symfony",
+        "php",
+        "doctrine",
+        "mysql",
+        "javascript",
+        "webpack",
+        "documentation"
+    ],
+    "author": "JJA-DEV",
+    "license": "MIT",
+    "dependencies": {
+        "@modelcontextprotocol/sdk": "^0.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "typescript": "^5.5.0"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "directories": {
+        "doc": "docs"
+    }
+}
