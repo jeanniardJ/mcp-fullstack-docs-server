@@ -4,18 +4,57 @@ Ce dossier contient des scripts pour télécharger automatiquement la documentat
 
 ## 🚀 Scripts disponibles
 
-### 1. Script Node.js simplifié (Recommandé pour débuter)
+### 1. **Téléchargement complet recommandé** ⭐
+
+```bash
+npm run docs:download:complete
+```
+
+- 🌟 **NOUVEAU** - Script tout-en-un optimisé
+- 📚 **Symfony 6.4 LTS + 7.3 Latest** (multi-versions)
+- 🌐 **HTML5 complet** depuis MDN Mozilla
+- ⚡ **PHP 8.2+ complet** avec fonctionnalités modernes
+- 🔄 Configuration automatique et compilation
+- 🎯 Un seul script pour tout télécharger
+
+### 2. Scripts spécialisés
+
+#### Symfony multi-versions
+```bash
+npm run docs:symfony:multi
+```
+- 📦 Télécharge Symfony 6.4 LTS ET 7.3 Latest
+- 📁 Structure: `docs/symfony-6.4/` et `docs/symfony-7.3/`
+- 📋 Documentation complète pour chaque version
+
+#### HTML complet MDN
+```bash
+npm run docs:html:mdn
+```
+- 🌐 Documentation HTML5 complète depuis Mozilla MDN
+- 📖 Éléments, attributs, formulaires, sémantique
+- 🎨 Media, tableaux, accessibilité, composants
+
+#### PHP moderne complet
+```bash
+npm run docs:php:complete
+```
+- ⚡ PHP 8.2+ avec toutes les fonctionnalités modernes
+- 🎯 Enums, Attributs, Fibers, Union Types
+- 🔧 OOP avancée, collections, programmation asynchrone
+
+### 3. Script Node.js simplifié (Compatible tous systèmes)
 
 ```bash
 npm run docs:download
 ```
 
 - ✅ Compatible tous systèmes
-- ✅ Télécharge les pages principales Symfony
+- ✅ Télécharge Symfony de base
 - ✅ Conversion RST → Markdown automatique
 - ✅ Gestion d'erreurs robuste
 
-### 2. Téléchargement complet de toutes les technologies
+### 4. Téléchargement legacy (ancien système)
 
 ```bash
 npm run docs:download:all

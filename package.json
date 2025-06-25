@@ -20,11 +20,16 @@
         "docs:download:ps": "powershell -ExecutionPolicy Bypass -File scripts/download-symfony-docs.ps1",
         "docs:download:all": "node scripts/download-all-docs.js",
         "docs:download:all:ps": "powershell -ExecutionPolicy Bypass -File scripts/download-all-docs.ps1",
+        "docs:download:complete": "node scripts/download-complete-all.js",
+        "docs:symfony:multi": "node scripts/download-symfony-multi-versions.js",
+        "docs:html:mdn": "node scripts/download-html-mdn.js",
+        "docs:php:complete": "node scripts/generate-php-complete.js",
         "docs:generate": "node scripts/generate-all-docs.js",
         "docs:generate:mysql": "node scripts/generate-mysql-docs.js",
         "docs:report": "node scripts/report-documentation.js",
-        "docs:update": "npm run docs:download:all && npm run docs:generate && npm run build",
-        "docs:update:quick": "npm run docs:generate && npm run build"
+        "docs:update": "npm run docs:download:complete && npm run build",
+        "docs:update:quick": "npm run docs:generate && npm run build",
+        "docs:update:legacy": "npm run docs:download:all && npm run docs:generate && npm run build"
     },
     "keywords": [
         "mcp",
