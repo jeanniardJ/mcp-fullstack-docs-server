@@ -26,16 +26,31 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 
 ## 📚 Technologies supportées
 
-| Technologie    | Version | Fichiers    | Status              |
-| -------------- | ------- | ----------- | ------------------- |
-| **Symfony**    | 7.1     | 21 fichiers | ✅ Officielle GitHub |
-| **PHP**        | 8.2     | 3 fichiers  | ✅ Exemples avancés  |
-| **MySQL**      | 8.0     | 8 fichiers  | ✅ Guide complet     |
-| **JavaScript** | ES2023  | 2 fichiers  | ✅ MDN officiel      |
-| **CSS**        | 3       | 2 fichiers  | ✅ Layouts modernes  |
-| **HTML**       | 5       | À venir     | 🔄 En développement  |
-| **Doctrine**   | 3.0     | 1 fichier   | ✅ ORM officiel      |
-| **Webpack**    | 5.89    | 1 fichier   | ✅ Configuration     |
+| Technologie    | Version     | Fichiers    | Status              |
+| -------------- | ----------- | ----------- | ------------------- |
+| **Symfony**    | 6.4 LTS + 7.3 | 21 fichiers | ✅ Multi-versions GitHub |
+| **PHP**        | 8.2+        | 3 fichiers  | ✅ Exemples avancés  |
+| **MySQL**      | 8.0         | 8 fichiers  | ✅ Guide complet     |
+| **JavaScript** | ES2023      | 2 fichiers  | ✅ MDN officiel      |
+| **CSS**        | 3           | 2 fichiers  | ✅ Layouts modernes  |
+| **HTML**       | 5           | À venir     | 🔄 En développement  |
+| **Doctrine**   | 3.0         | 1 fichier   | ✅ ORM officiel      |
+| **Webpack**    | 5.89        | 1 fichier   | ✅ Configuration     |
+
+### 📚 Versions Symfony supportées
+
+Ce serveur MCP inclut la documentation pour **deux versions majeures** de Symfony :
+
+- **Symfony 6.4 LTS** - Version Long Term Support (support jusqu'en novembre 2027)
+- **Symfony 7.3** - Version Latest avec les dernières fonctionnalités
+
+La documentation couvre tous les composants essentiels :
+- Controllers, Routing, Forms, Security
+- Cache, Services, Validation, Serializer
+- Testing, Commands, Events, Templates
+- Configuration et Deployment
+
+> 💡 **Conseil** : Utilisez Symfony 6.4 LTS pour les projets de production long terme, et Symfony 7.3 pour découvrir les nouvelles fonctionnalités.
 
 ## 🚀 Installation rapide
 

@@ -2,7 +2,8 @@
     "technologies": {
         "symfony": {
             "name": "Symfony",
-            "version": "6.4",
+            "version": "6.4 LTS + 7.3",
+            "description": "Framework PHP moderne - Versions 6.4 LTS et 7.3 Latest",
             "docsPath": "docs/symfony",
             "categories": [
                 "controller",
