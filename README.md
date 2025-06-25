@@ -65,7 +65,6 @@ Dans le chat GitHub Copilot, utilisez directement les commandes MCP :
 # Voir les catégories disponibles
 @mcp_fullstack-doc_get_categories technology="mysql"
 ```
-```
 
 ## Utilisation
 
@@ -144,6 +143,49 @@ La configuration des technologies se trouve dans `src/config/technologies.json`.
 1. Ajoutez votre documentation dans le dossier `docs/`
 2. Modifiez la configuration si nécessaire
 3. Testez avec les outils MCP
+
+## 🚀 Démarrage rapide
+
+### Mode stdio (recommandé pour usage personnel)
+```bash
+# 1. Construction
+npm run build
+
+# 2. Démarrage standalone
+npm start
+```
+
+### Mode HTTP (recommandé pour développement/équipe)
+```bash
+# 1. Construction
+npm run build
+
+# 2. Démarrage serveur HTTP
+npm run start:http
+# ou avec port personnalisé
+node build/http-server.js 3001
+
+# 3. Interface web disponible à http://localhost:3001
+```
+
+## 🌐 Modes de fonctionnement
+
+Ce serveur MCP supporte **deux modes** de communication :
+
+### 📡 Mode stdio (défaut)
+- Communication via stdin/stdout
+- Processus enfant pour chaque client
+- Sécurisé et isolé
+- Configuration : `mcp.json`
+
+### 🌐 Mode HTTP + SSE  
+- Communication via HTTP et Server-Sent Events
+- Un serveur pour tous les clients
+- Interface web de diagnostic
+- API REST pour tests
+- Configuration : `mcp-http-example.json`
+
+> 📖 **Guide complet** : Voir [HTTP-SERVER-GUIDE.md](./HTTP-SERVER-GUIDE.md) pour tous les détails
 
 ## License
 

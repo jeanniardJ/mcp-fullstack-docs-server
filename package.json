@@ -8,7 +8,9 @@
         "build": "tsc && npm run copy:config",
         "copy:config": "powershell -c \"Copy-Item 'src/config' 'build/' -Recurse -Force\"",
         "start": "node build/index.js",
+        "start:http": "node build/http-server.js",
         "dev": "npm run build && node build/index.js",
+        "dev:http": "npm run build && node build/http-server.js",
         "watch": "tsc --watch",
         "configure:mcp": "node configure-mcp.js",
         "setup:standalone": "npm run build && npm run configure:mcp",
@@ -47,10 +49,14 @@
     "author": "JJA-DEV",
     "license": "MIT",
     "dependencies": {
-        "@modelcontextprotocol/sdk": "^0.4.0"
+        "@modelcontextprotocol/sdk": "^0.4.0",
+        "cors": "^2.8.5"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.19",
+        "@types/express": "^4.17.21",
         "@types/node": "^22.0.0",
+        "express": "^4.21.2",
         "typescript": "^5.5.0"
     },
     "engines": {
