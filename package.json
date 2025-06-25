@@ -10,6 +10,8 @@
         "start": "node build/index.js",
         "dev": "npm run build && node build/index.js",
         "watch": "tsc --watch",
+        "configure:mcp": "node configure-mcp.js",
+        "setup:standalone": "npm run build && npm run configure:mcp",
         "test": "node test-complete.js",
         "test:basic": "node test-basic.js",
         "fix": "node fix-config.js",

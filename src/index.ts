@@ -6,23 +6,36 @@ import { ListToolsRequestSchema, CallToolRequestSchema } from '@modelcontextprot
 import { DocumentationService } from './services/documentationService.js';
 import { ToolHandlers } from './handlers/toolHandlers.js';
 
+/**
+ * Serveur MCP Fullstack Documentation - Version Standalone
+ * 
+ * Serveur MCP autonome pour la documentation fullstack :
+ * - Symfony 6.4 LTS + 7.3 Latest
+ * - PHP 8.2+ moderne (Enums, Attributs, Fibers)
+ * - HTML5 complet (MDN)
+ * - MySQL 8.0, JavaScript ES2023, CSS3
+ * - Doctrine ORM, Webpack
+ * 
+ * Usage:
+ *   node build/index.js
+ * 
+ * Configuration MCP (Claude Desktop):
+ *   "fullstack-docs": {
+ *     "command": "node",
+ *     "args": ["path/to/build/index.js"],
+ *     "cwd": "path/to/project"
+ *   }
+ */
 class FullstackDocsServer {
   private server: Server;
   private docService: DocumentationService | null = null;
   private toolHandlers: ToolHandlers | null = null;
 
   constructor() {
-    this.server = new Server(
-      {
-        name: "mcp-fullstack-docs-server",
-        version: "1.0.0"
-      },
-      {
-        capabilities: {
-          tools: {}
-        }
-      }
-    );
+    this.server = new Server({
+      name: "mcp-fullstack-docs-server",
+      version: "1.0.0"
+    });
 
     this.setupHandlers();
     this.initializeServices();

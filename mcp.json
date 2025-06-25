@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fullstack-docs": {
+      "command": "node",
+      "args": ["build/index.js"],
+      "cwd": ".",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  }
+}
