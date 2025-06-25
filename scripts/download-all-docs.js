@@ -3,6 +3,7 @@
 /**
  * Script maître pour télécharger la documentation complète de toutes les technologies
  * Symfony, PHP, Doctrine, MySQL, JavaScript, HTML, CSS, Webpack
+ * Avec indicateurs de progression et statuts de téléchargement
  */
 
 import { execSync } from 'child_process';
@@ -16,7 +17,55 @@ const __dirname = dirname(__filename);
 const DOCS_DIR = join(__dirname, '..', 'docs');
 const TEMP_DIR = join(__dirname, '..', 'temp');
 
-console.log('🚀 Téléchargement complet de toutes les documentations...');
+// 🎨 Fonctions d'affichage avec couleurs et statuts
+const colors = {
+    reset: '\x1b[0m',
+    bright: '\x1b[1m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m'
+};
+
+function logStatus(status, message, details = '') {
+    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+    const statusIcons = {
+        'start': '🚀',
+        'progress': '⏳',
+        'success': '✅',
+        'error': '❌',
+        'info': 'ℹ️',
+        'warning': '⚠️'
+    };
+    
+    const statusColors = {
+        'start': colors.blue,
+        'progress': colors.yellow,
+        'success': colors.green,
+        'error': colors.red,
+        'info': colors.cyan,
+        'warning': colors.magenta
+    };
+    
+    const icon = statusIcons[status] || '📄';
+    const color = statusColors[status] || colors.reset;
+    
+    console.log(`${color}[${timestamp}] ${icon} ${message}${colors.reset}${details ? ` ${details}` : ''}`);
+}
+
+function showProgress(current, total, item = '') {
+    const percentage = Math.round((current / total) * 100);
+    const barLength = 20;
+    const filledLength = Math.round((percentage / 100) * barLength);
+    const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
+    
+    process.stdout.write(`\r${colors.cyan}Progress: [${bar}] ${percentage}% (${current}/${total})${colors.reset} ${item}`);
+    if (current === total) console.log(''); // Nouvelle ligne à la fin
+}
+
+logStatus('start', 'Téléchargement complet de toutes les documentations...');
 
 // Configuration des sources de documentation
 const documentationSources = {
@@ -143,16 +192,26 @@ const documentationSources = {
 };
 
 async function downloadAllDocumentation() {
+    const startTime = Date.now();
+    
     try {
         // Créer les dossiers nécessaires
         if (existsSync(TEMP_DIR)) {
-            console.log('🧹 Nettoyage du dossier temporaire...');
+            logStatus('progress', 'Nettoyage du dossier temporaire...');
             rmSync(TEMP_DIR, { recursive: true, force: true });
         }
         mkdirSync(TEMP_DIR, { recursive: true });
 
+        const technologies = Object.keys(documentationSources);
+        const totalTechs = technologies.length;
+        let processedTechs = 0;
+
+        logStatus('info', `Technologies à traiter: ${totalTechs}`, `(${technologies.join(', ')})`);
+
         for (const [tech, config] of Object.entries(documentationSources)) {
-            console.log(`\n📚 Téléchargement de la documentation ${tech.toUpperCase()}...`);
+            processedTechs++;
+            console.log(`\n${colors.bright}=== ${tech.toUpperCase()} (${processedTechs}/${totalTechs}) ===${colors.reset}`);
+            logStatus('start', `Téléchargement de la documentation ${tech.toUpperCase()}...`);
             
             const techDir = join(DOCS_DIR, tech);
             if (!existsSync(techDir)) {
@@ -170,57 +229,134 @@ async function downloadAllDocumentation() {
                     await downloadFromManual(tech, config, techDir);
                     break;
             }
+            
+            showProgress(processedTechs, totalTechs, `${tech} terminé`);
         }
 
         // Nettoyer
-        console.log('\n🧹 Nettoyage final...');
-        rmSync(TEMP_DIR, { recursive: true, force: true });
+        logStatus('progress', 'Nettoyage final...');
+        if (existsSync(TEMP_DIR)) {
+            rmSync(TEMP_DIR, { recursive: true, force: true });
+        }
 
-        console.log('\n✅ Toutes les documentations ont été téléchargées!');
-        console.log(`📁 Fichiers disponibles dans: ${DOCS_DIR}`);
+        const duration = Math.round((Date.now() - startTime) / 1000);
+        logStatus('success', `Toutes les documentations ont été téléchargées!`, `(${duration}s)`);
+        console.log(`\n📁 Fichiers disponibles dans: ${DOCS_DIR}`);
+
+        // Afficher un résumé final
+        await showFinalSummary();
 
         // Mettre à jour la configuration
         await updateTechnologiesConfig();
 
     } catch (error) {
-        console.error('❌ Erreur lors du téléchargement:', error.message);
+        logStatus('error', 'Erreur lors du téléchargement:', error.message);
         process.exit(1);
+    }
+}
+
+async function showFinalSummary() {
+    console.log(`\n${colors.bright}📊 RÉSUMÉ FINAL${colors.reset}`);
+    
+    const technologies = Object.keys(documentationSources);
+    for (const tech of technologies) {
+        const techDir = join(DOCS_DIR, tech);
+        if (existsSync(techDir)) {
+            const categories = readdirSync(techDir, { withFileTypes: true })
+                .filter(dirent => dirent.isDirectory())
+                .map(dirent => dirent.name);
+            
+            let totalFiles = 0;
+            let totalSize = 0;
+            
+            for (const category of categories) {
+                const categoryDir = join(techDir, category);
+                const files = readdirSync(categoryDir, { withFileTypes: true })
+                    .filter(dirent => dirent.isFile() && dirent.name.endsWith('.md'));
+                
+                totalFiles += files.length;
+                
+                for (const file of files) {
+                    const filePath = join(categoryDir, file.name);
+                    const stats = statSync(filePath);
+                    totalSize += stats.size;
+                }
+            }
+            
+            const sizeKB = Math.round(totalSize / 1024);
+            logStatus('info', `${tech.toUpperCase()}:`, `${totalFiles} fichiers, ${categories.length} catégories, ${sizeKB}KB`);
+        } else {
+            logStatus('warning', `${tech.toUpperCase()}:`, 'Dossier non trouvé');
+        }
     }
 }
 
 async function downloadFromGitHub(tech, config, techDir) {
     const repoDir = join(TEMP_DIR, tech);
     
-    console.log(`📥 Clonage de ${config.repo}...`);
-    execSync(`git clone --depth 1 --branch ${config.branch} https://github.com/${config.repo}.git ${repoDir}`, {
-        stdio: 'inherit'
-    });
+    logStatus('progress', `Clonage de ${config.repo}...`);
+    try {
+        execSync(`git clone --depth 1 --branch ${config.branch} https://github.com/${config.repo}.git ${repoDir}`, {
+            stdio: 'pipe'
+        });
+        logStatus('success', `Repository cloné: ${config.repo}`);
+    } catch (error) {
+        logStatus('error', `Erreur de clonage: ${error.message}`);
+        return;
+    }
+
+    const totalFiles = config.files.length;
+    let processedFiles = 0;
+    let successCount = 0;
+    let errorCount = 0;
 
     for (const file of config.files) {
+        processedFiles++;
+        showProgress(processedFiles, totalFiles, file.name);
+        
         const sourcePath = join(repoDir, file.path);
         if (existsSync(sourcePath)) {
-            const content = readFileSync(sourcePath, 'utf-8');
-            const markdown = convertToMarkdown(content, file.name, tech);
-            
-            const categoryDir = join(techDir, file.category);
-            if (!existsSync(categoryDir)) {
-                mkdirSync(categoryDir, { recursive: true });
+            try {
+                const content = readFileSync(sourcePath, 'utf-8');
+                const markdown = convertToMarkdown(content, file.name, tech);
+                
+                const categoryDir = join(techDir, file.category);
+                if (!existsSync(categoryDir)) {
+                    mkdirSync(categoryDir, { recursive: true });
+                }
+                
+                const targetPath = join(categoryDir, file.name);
+                writeFileSync(targetPath, markdown);
+                successCount++;
+                logStatus('success', `✓ ${file.name}`, `(${file.category})`);
+            } catch (error) {
+                errorCount++;
+                logStatus('error', `✗ Erreur processing ${file.name}:`, error.message);
             }
-            
-            const targetPath = join(categoryDir, file.name);
-            writeFileSync(targetPath, markdown);
-            console.log(`  ✓ ${file.name}`);
         } else {
-            console.log(`  ⚠️ Fichier non trouvé: ${file.path}`);
+            errorCount++;
+            logStatus('warning', `⚠ Fichier non trouvé: ${file.path}`);
         }
     }
+    
+    logStatus('info', `${tech.toUpperCase()} terminé:`, `${successCount} succès, ${errorCount} erreurs`);
 }
 
 async function downloadFromMDN(tech, config, techDir) {
+    const totalFiles = config.files.length;
+    let processedFiles = 0;
+    let successCount = 0;
+    let errorCount = 0;
+
+    logStatus('start', `Téléchargement MDN pour ${tech.toUpperCase()}...`);
+
     for (const file of config.files) {
+        processedFiles++;
+        showProgress(processedFiles, totalFiles, file.name);
+        
         try {
             const url = config.baseUrl + file.path;
-            console.log(`📄 Téléchargement: ${file.name}...`);
+            logStatus('progress', `📥 ${file.name}...`);
             
             const response = await fetch(url);
             if (response.ok) {
@@ -234,21 +370,26 @@ async function downloadFromMDN(tech, config, techDir) {
                 
                 const targetPath = join(categoryDir, file.name);
                 writeFileSync(targetPath, markdown);
-                console.log(`  ✓ ${file.name}`);
+                successCount++;
+                logStatus('success', `✓ ${file.name}`, `(${content.length} chars)`);
             } else {
-                console.log(`  ⚠️ Erreur HTTP ${response.status} pour ${file.name}`);
+                errorCount++;
+                logStatus('error', `✗ HTTP ${response.status} pour ${file.name}`);
             }
         } catch (error) {
-            console.log(`  ❌ Erreur pour ${file.name}: ${error.message}`);
+            errorCount++;
+            logStatus('error', `✗ Erreur ${file.name}:`, error.message);
         }
     }
+    
+    logStatus('info', `${tech.toUpperCase()} terminé:`, `${successCount} succès, ${errorCount} erreurs`);
 }
 
 async function downloadFromManual(tech, config, techDir) {
     for (const file of config.files) {
         try {
             const url = config.baseUrl + file.path;
-            console.log(`📄 Téléchargement: ${file.name}...`);
+            logStatus('progress', `Téléchargement: ${file.name}...`);
             
             const response = await fetch(url);
             if (response.ok) {
@@ -264,12 +405,12 @@ async function downloadFromManual(tech, config, techDir) {
                 
                 const targetPath = join(categoryDir, file.name);
                 writeFileSync(targetPath, markdown);
-                console.log(`  ✓ ${file.name}`);
+                logStatus('success', `Fichier téléchargé: ${file.name}`);
             } else {
-                console.log(`  ⚠️ Erreur HTTP ${response.status} pour ${file.name}`);
+                logStatus('error', `Erreur HTTP ${response.status} pour ${file.name}`);
             }
         } catch (error) {
-            console.log(`  ❌ Erreur pour ${file.name}: ${error.message}`);
+            logStatus('error', `Erreur pour ${file.name}: ${error.message}`);
         }
     }
 }
@@ -375,7 +516,7 @@ function convertToMarkdown(content, filename, tech) {
 }
 
 async function updateTechnologiesConfig() {
-    console.log('\n🔧 Mise à jour de la configuration...');
+    logStatus('progress', 'Mise à jour de la configuration...');
     
     const configPath = join(__dirname, '..', 'src', 'config', 'technologies.json');
     const config = JSON.parse(readFileSync(configPath, 'utf-8'));
@@ -405,7 +546,7 @@ async function updateTechnologiesConfig() {
         writeFileSync(buildConfigPath, JSON.stringify(config, null, 2));
     }
     
-    console.log('✅ Configuration mise à jour!');
+    logStatus('success', 'Configuration mise à jour!');
 }
 
 // Exécuter le script

@@ -3,6 +3,7 @@
 /**
  * Script pour télécharger la documentation HTML complète depuis MDN Mozilla
  * Récupère les guides et références HTML5 essentiels
+ * Avec indicateurs de progression et statuts détaillés
  */
 
 import { execSync } from 'child_process';
@@ -15,7 +16,55 @@ const __dirname = dirname(__filename);
 
 const DOCS_DIR = join(__dirname, '..', 'docs', 'html');
 
-console.log('📥 Téléchargement de la documentation HTML depuis MDN Mozilla...');
+// 🎨 Système de statuts et de progression
+const colors = {
+    reset: '\x1b[0m',
+    bright: '\x1b[1m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m'
+};
+
+function logStatus(status, message, details = '') {
+    const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+    const statusIcons = {
+        'start': '🚀',
+        'progress': '⏳',
+        'success': '✅',
+        'error': '❌',
+        'info': 'ℹ️',
+        'warning': '⚠️'
+    };
+    
+    const statusColors = {
+        'start': colors.blue,
+        'progress': colors.yellow,
+        'success': colors.green,
+        'error': colors.red,
+        'info': colors.cyan,
+        'warning': colors.magenta
+    };
+    
+    const icon = statusIcons[status] || '📄';
+    const color = statusColors[status] || colors.reset;
+    
+    console.log(`${color}[${timestamp}] ${icon} ${message}${colors.reset}${details ? ` ${details}` : ''}`);
+}
+
+function showProgress(current, total, item = '') {
+    const percentage = Math.round((current / total) * 100);
+    const barLength = 25;
+    const filledLength = Math.round((percentage / 100) * barLength);
+    const bar = '█'.repeat(filledLength) + '░'.repeat(barLength - filledLength);
+    
+    process.stdout.write(`\r${colors.cyan}Progress: [${bar}] ${percentage}% (${current}/${total})${colors.reset} ${item}`);
+    if (current === total) console.log(''); // Nouvelle ligne à la fin
+}
+
+logStatus('start', 'Téléchargement de la documentation HTML depuis MDN Mozilla...');
 
 // URLs de la documentation HTML sur MDN
 const HTML_DOCS = [
@@ -416,6 +465,7 @@ async function downloadHtmlDocs() {
         } else {
             errorCount++;
         }
+        showProgress(successCount + errorCount, HTML_DOCS.length, doc.title);
     }
 
     // Créer un fichier de résumé
