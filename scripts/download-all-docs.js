@@ -10,6 +10,7 @@ import { execSync } from 'child_process';
 import { mkdirSync, existsSync, writeFileSync, readFileSync, rmSync, readdirSync, statSync } from 'fs';
 import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
+import { createHtmlDocumentation } from './create-html-docs-basic.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -188,6 +189,11 @@ const documentationSources = {
             { path: 'src/content/guides/production.mdx', category: 'production', name: 'production.md' },
             { path: 'src/content/guides/code-splitting.mdx', category: 'optimization', name: 'code-splitting.md' }
         ]
+    },
+    
+    html: {
+        type: 'basic',
+        description: 'Documentation HTML5 créée localement'
     }
 };
 
@@ -227,6 +233,9 @@ async function downloadAllDocumentation() {
                     break;
                 case 'manual':
                     await downloadFromManual(tech, config, techDir);
+                    break;
+                case 'basic':
+                    await downloadBasicDocs(tech, config, techDir);
                     break;
             }
             
@@ -412,6 +421,22 @@ async function downloadFromManual(tech, config, techDir) {
         } catch (error) {
             logStatus('error', `Erreur pour ${file.name}: ${error.message}`);
         }
+    }
+}
+
+async function downloadBasicDocs(tech, config, techDir) {
+    logStatus('progress', `Création de la documentation ${tech.toUpperCase()}...`);
+    
+    try {
+        if (tech === 'html') {
+            // Utiliser notre fonction dédiée HTML
+            const result = await createHtmlDocumentation();
+            logStatus('success', `Documentation HTML créée: ${result.filesCreated} fichiers`);
+        } else {
+            logStatus('warning', `Type 'basic' non implémenté pour ${tech}`);
+        }
+    } catch (error) {
+        logStatus('error', `Erreur lors de la création de la documentation ${tech}:`, error.message);
     }
 }
 

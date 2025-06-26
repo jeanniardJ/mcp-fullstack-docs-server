@@ -111,9 +111,9 @@
             "categories": [
                 "elements",
                 "forms",
-                "multimedia",
                 "semantic",
-                "accessibility"
+                "attributes",
+                "guides"
             ],
             "fileExtensions": [
                 ".md",

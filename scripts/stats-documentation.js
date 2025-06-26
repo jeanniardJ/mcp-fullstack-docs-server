@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const configPath = join(__dirname, '..', 'src', 'config', 'technologies.json');
+const docsDir = join(__dirname, '..', 'docs');
 
 /**
  * Formate la taille en bytes de manière lisible

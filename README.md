@@ -19,7 +19,7 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 - 🤖 **Intégration GitHub Copilot** native
 - 🛠️ **Extension VS Code** avec auto-complétion
 - ⚡ **Recherche croisée** entre technologies
-- 🎯 **38+ fichiers** de documentation (845 KB)
+- 🎯 **50+ fichiers** de documentation (1.2 MB)
 - 🔄 **Mise à jour automatique** des sources
 - 🌐 **Mode HTTP avec SSE** - Interface web et API REST
 - 📡 **Mode stdio** traditionnel pour usage personnel
@@ -32,10 +32,10 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 | **PHP**        | 8.2+          | 3 fichiers  | ✅ Exemples avancés      |
 | **MySQL**      | 8.0           | 8 fichiers  | ✅ Guide complet         |
 | **JavaScript** | ES2023        | 2 fichiers  | ✅ MDN officiel          |
-| **CSS**        | 3             | 2 fichiers  | ✅ Layouts modernes      |
-| **HTML**       | 5             | À venir     | 🔄 En développement      |
+| **CSS**        | 3             | 4 fichiers  | ✅ Layouts modernes      |
+| **HTML**       | 5             | 12 fichiers | ✅ MDN référence         |
 | **Doctrine**   | 3.0           | 1 fichier   | ✅ ORM officiel          |
-| **Webpack**    | 5.89          | 1 fichier   | ✅ Configuration         |
+| **Webpack**    | 5.89          | 8 fichiers  | ✅ Guide complet         |
 
 ### 📚 Versions Symfony supportées
 
