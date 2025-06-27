@@ -1,7 +1,7 @@
 # promises - Documentation JAVASCRIPT
 
 > Source: Documentation officielle javascript
-> Téléchargé le 25/06/2025
+> Téléchargé le 27/06/2025
 
 ---
 

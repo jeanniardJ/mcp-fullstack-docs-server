@@ -3,14 +3,28 @@
 /**
  * Script maître pour télécharger la documentation complète de toutes les technologies
  * Symfony, PHP, Doctrine, MySQL, JavaScript, HTML, CSS, Webpack
- * Avec indicateurs de progression et statuts de téléchargement
+ * Avec indicateurs de proasync function downloadGeneratedDocs(tech, config, techDir) {
+    try {
+        logStatus('info', `Téléchargement de la documentation ${tech}...`);
+        
+        if (tech === 'npm') {
+            const created = await downloadNpmDocs();
+            logStatus('success', `Documentation ${tech} téléchargée: ${created} pages`);
+        } else {
+            logStatus('warning', `Type de documentation générée non supporté: ${tech}`);
+        }
+    } catch (error) {
+        logStatus('error', `Erreur lors du téléchargement ${tech}:`, error.message);
+    }
+}atuts de téléchargement
  */
 
 import { execSync } from 'child_process';
 import { mkdirSync, existsSync, writeFileSync, readFileSync, rmSync, readdirSync, statSync } from 'fs';
 import { join, dirname, basename } from 'path';
 import { fileURLToPath } from 'url';
-import { createHtmlDocumentation } from './create-html-docs-basic.js';
+import { downloadNpmDocs } from './download-npm-docs-official.js';
+import { downloadMysqlDocs } from './download-mysql-official.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -127,6 +141,11 @@ const documentationSources = {
         ]
     },
     
+    mysql: {
+        type: 'official',
+        description: 'Documentation MySQL officielle téléchargée depuis dev.mysql.com'
+    },
+    
     javascript: {
         type: 'mdn',
         baseUrl: 'https://raw.githubusercontent.com/mdn/content/main/files/en-us/web/javascript/',
@@ -191,11 +210,32 @@ const documentationSources = {
         ]
     },
     
-    html: {
-        type: 'basic',
-        description: 'Documentation HTML5 créée localement'
+    npm: {
+        type: 'official',
+        description: 'Documentation NPM officielle téléchargée depuis docs.npmjs.com'
     }
 };
+
+/**
+ * Télécharge la documentation depuis les sources officielles (NPM, MySQL)
+ */
+async function downloadOfficialDocs(tech, config, techDir) {
+    try {
+        logStatus('info', `Téléchargement depuis les sources officielles: ${tech}...`);
+        
+        if (tech === 'npm') {
+            const created = await downloadNpmDocs();
+            logStatus('success', `Documentation ${tech} téléchargée: ${created} fichiers depuis docs.npmjs.com`);
+        } else if (tech === 'mysql') {
+            const created = await downloadMysqlDocs();
+            logStatus('success', `Documentation ${tech} téléchargée: ${created} fichiers depuis dev.mysql.com`);
+        } else {
+            logStatus('warning', `Sources officielles non configurées pour: ${tech}`);
+        }
+    } catch (error) {
+        logStatus('error', `Erreur lors du téléchargement officiel ${tech}:`, error.message);
+    }
+}
 
 async function downloadAllDocumentation() {
     const startTime = Date.now();
@@ -234,9 +274,11 @@ async function downloadAllDocumentation() {
                 case 'manual':
                     await downloadFromManual(tech, config, techDir);
                     break;
-                case 'basic':
-                    await downloadBasicDocs(tech, config, techDir);
+                case 'official':
+                    await downloadOfficialDocs(tech, config, techDir);
                     break;
+                default:
+                    logStatus('error', `Type de documentation non supporté: ${config.type} pour ${tech}`);
             }
             
             showProgress(processedTechs, totalTechs, `${tech} terminé`);
@@ -424,22 +466,6 @@ async function downloadFromManual(tech, config, techDir) {
     }
 }
 
-async function downloadBasicDocs(tech, config, techDir) {
-    logStatus('progress', `Création de la documentation ${tech.toUpperCase()}...`);
-    
-    try {
-        if (tech === 'html') {
-            // Utiliser notre fonction dédiée HTML
-            const result = await createHtmlDocumentation();
-            logStatus('success', `Documentation HTML créée: ${result.filesCreated} fichiers`);
-        } else {
-            logStatus('warning', `Type 'basic' non implémenté pour ${tech}`);
-        }
-    } catch (error) {
-        logStatus('error', `Erreur lors de la création de la documentation ${tech}:`, error.message);
-    }
-}
-
 function extractPHPManualContent(html) {
     // Extraire le contenu principal du manuel PHP
     const mainContentMatch = html.match(/<div class="sect1"[^>]*>([\s\S]*?)<\/div>/);
@@ -554,7 +580,8 @@ async function updateTechnologiesConfig() {
         javascript: ['syntax', 'async', 'classes', 'modules', 'dom', 'functions', 'apis'],
         css: ['layout', 'animations', 'responsive', 'variables', 'selectors'],
         html: ['forms', 'graphics', 'media', 'attributes', 'metadata'],
-        webpack: ['concepts', 'config', 'loaders', 'plugins', 'getting-started', 'development', 'production', 'optimization']
+        webpack: ['concepts', 'config', 'loaders', 'plugins', 'getting-started', 'development', 'production', 'optimization'],
+        npm: ['basics', 'commands', 'package-json', 'publishing', 'workspaces', 'security']
     };
     
     for (const [tech, categories] of Object.entries(newCategories)) {

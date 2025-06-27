@@ -1,6 +1,6 @@
 # 🚀 MCP Fullstack Documentation Server
 
-> **Serveur MCP complet pour la documentation fullstack** - Symfony, PHP, Doctrine, MySQL, JavaScript, HTML, CSS, Webpack
+> **Serveur MCP complet pour la documentation fullstack** - Symfony, PHP, Doctrine, MySQL, JavaScript, HTML, CSS, Webpack, NPM
 
 [![GitHub](https://img.shields.io/badge/GitHub-jeanniardJ-blue?logo=github)](https://github.com/jeanniardJ)
 [![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
@@ -14,28 +14,29 @@ Intégration native avec **GitHub Copilot** et **VS Code** pour accéder instant
 
 ## ✨ Fonctionnalités
 
-- 🔍 **Recherche intelligente** dans 8 technologies fullstack
-- 📚 **Documentation officielle** téléchargée automatiquement  
+- 🔍 **Recherche intelligente** dans 9 technologies fullstack
+- 📚 **Documentation 100% officielle** téléchargée exclusivement depuis les sources officielles  
 - 🤖 **Intégration GitHub Copilot** native
 - 🛠️ **Extension VS Code** avec auto-complétion
 - ⚡ **Recherche croisée** entre technologies
-- 🎯 **50+ fichiers** de documentation (1.2 MB)
-- 🔄 **Mise à jour automatique** des sources
+- 🎯 **80+ fichiers** de documentation officielle (1.5 MB)
+- 🔄 **Sources officielles uniquement** - aucun contenu généré
 - 🌐 **Mode HTTP avec SSE** - Interface web et API REST
 - 📡 **Mode stdio** traditionnel pour usage personnel
 
 ## 📚 Technologies supportées
 
-| Technologie    | Version       | Fichiers    | Status                  |
-| -------------- | ------------- | ----------- | ----------------------- |
-| **Symfony**    | 6.4 LTS + 7.3 | 21 fichiers | ✅ Multi-versions GitHub |
-| **PHP**        | 8.2+          | 3 fichiers  | ✅ Exemples avancés      |
-| **MySQL**      | 8.0           | 8 fichiers  | ✅ Guide complet         |
-| **JavaScript** | ES2023        | 2 fichiers  | ✅ MDN officiel          |
-| **CSS**        | 3             | 4 fichiers  | ✅ Layouts modernes      |
-| **HTML**       | 5             | 12 fichiers | ✅ MDN référence         |
-| **Doctrine**   | 3.0           | 1 fichier   | ✅ ORM officiel          |
-| **Webpack**    | 5.89          | 8 fichiers  | ✅ Guide complet         |
+| Technologie    | Version       | Fichiers    | Status                                    |
+| -------------- | ------------- | ----------- | ----------------------------------------- |
+| **Symfony**    | 6.4 LTS + 7.3 | 21 fichiers | ✅ GitHub officiel multi-versions          |
+| **PHP**        | 8.2+          | 12 fichiers | ✅ Documentation officielle php.net        |
+| **MySQL**      | 8.0           | 8 fichiers  | ✅ Documentation officielle dev.mysql.com  |
+| **JavaScript** | ES2023        | 11 fichiers | ✅ MDN officiel GitHub                     |
+| **CSS**        | 3             | 7 fichiers  | ✅ MDN officiel GitHub                     |
+| **HTML**       | 5             | 5 fichiers  | ✅ MDN officiel GitHub                     |
+| **Doctrine**   | 3.0           | 1 fichier   | ✅ GitHub officiel ORM                     |
+| **Webpack**    | 5.89          | 9 fichiers  | ✅ GitHub officiel webpack.js.org          |
+| **NPM**        | 10.x          | 8 fichiers  | ✅ Documentation officielle docs.npmjs.com |
 
 ### 📚 Versions Symfony supportées
 

@@ -1,7 +1,7 @@
 # development - Documentation WEBPACK
 
 > Source: Documentation officielle webpack
-> Téléchargé le 25/06/2025
+> Téléchargé le 27/06/2025
 
 ---
 

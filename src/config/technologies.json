@@ -1,215 +1,237 @@
 {
-    "technologies": {
-        "symfony": {
-            "name": "Symfony",
-            "version": "6.4 LTS + 7.3",
-            "description": "Framework PHP moderne - Versions 6.4 LTS et 7.3 Latest",
-            "docsPath": "docs/symfony",
-            "categories": [
-                "controller",
-                "routing",
-                "forms",
-                "security",
-                "cache",
-                "services",
-                "validation",
-                "serializer",
-                "testing",
-                "commands",
-                "events",
-                "templates",
-                "configuration",
-                "deployment"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".rst"
-            ]
-        },
-        "php": {
-            "name": "PHP",
-            "version": "8.2",
-            "docsPath": "docs/php",
-            "categories": [
-                "oop",
-                "attributes",
-                "namespaces",
-                "functions",
-                "exceptions",
-                "cli",
-                "performance",
-                "syntax",
-                "traits"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".rst"
-            ]
-        },
-        "doctrine": {
-            "name": "Doctrine",
-            "version": "2.17",
-            "docsPath": "docs/doctrine",
-            "categories": [
-                "getting-started",
-                "entities",
-                "queries",
-                "orm",
-                "events",
-                "cache",
-                "transactions",
-                "migrations",
-                "repositories",
-                "dql"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".rst"
-            ]
-        },
-        "mysql": {
-            "name": "MySQL",
-            "version": "8.0",
-            "docsPath": "docs/mysql",
-            "categories": [
-                "queries",
-                "optimization",
-                "security",
-                "administration",
-                "json",
-                "indexes",
-                "procedures",
-                "triggers"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".sql"
-            ]
-        },
-        "javascript": {
-            "name": "JavaScript",
-            "version": "ES2023",
-            "docsPath": "docs/javascript",
-            "categories": [
-                "syntax",
-                "dom",
-                "async",
-                "modules",
-                "classes",
-                "functions",
-                "apis"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".js"
-            ]
-        },
-        "html": {
-            "name": "HTML",
-            "version": "5",
-            "docsPath": "docs/html",
-            "categories": [
-                "elements",
-                "forms",
-                "semantic",
-                "attributes",
-                "guides"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".html"
-            ]
-        },
-        "css": {
-            "name": "CSS",
-            "version": "3",
-            "docsPath": "docs/css",
-            "categories": [
-                "selectors",
-                "layout",
-                "flexbox",
-                "grid",
-                "animations",
-                "responsive"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".css"
-            ]
-        },
-        "webpack": {
-            "name": "Webpack",
-            "version": "5.89",
-            "docsPath": "docs/webpack",
-            "categories": [
-                "config",
-                "loaders",
-                "plugins",
-                "optimization",
-                "dev-server"
-            ],
-            "fileExtensions": [
-                ".md",
-                ".js"
-            ]
-        }
+  "technologies": {
+    "symfony": {
+      "name": "Symfony",
+      "version": "6.4 LTS + 7.3",
+      "description": "Framework PHP moderne - Versions 6.4 LTS et 7.3 Latest",
+      "docsPath": "docs/symfony",
+      "categories": [
+        "controller",
+        "routing",
+        "forms",
+        "security",
+        "cache",
+        "services",
+        "validation",
+        "serializer",
+        "testing",
+        "commands",
+        "events",
+        "templates",
+        "configuration",
+        "deployment"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".rst"
+      ]
     },
-    "correlations": {
-        "performance": [
-            "symfony",
-            "doctrine",
-            "mysql",
-            "javascript",
-            "webpack"
-        ],
-        "security": [
-            "symfony",
-            "php",
-            "mysql",
-            "html",
-            "css"
-        ],
-        "frontend": [
-            "html",
-            "css",
-            "javascript",
-            "webpack"
-        ],
-        "backend": [
-            "symfony",
-            "php",
-            "doctrine",
-            "mysql"
-        ],
-        "database": [
-            "doctrine",
-            "mysql",
-            "php"
-        ],
-        "forms": [
-            "symfony",
-            "html",
-            "css",
-            "javascript"
-        ],
-        "api": [
-            "symfony",
-            "php",
-            "javascript"
-        ],
-        "debugging": [
-            "symfony",
-            "php",
-            "doctrine",
-            "javascript",
-            "webpack"
-        ]
+    "php": {
+      "name": "PHP",
+      "version": "8.2",
+      "docsPath": "docs/php",
+      "categories": [
+        "oop",
+        "attributes",
+        "namespaces",
+        "functions",
+        "exceptions",
+        "cli",
+        "performance"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".rst"
+      ]
     },
-    "searchWeights": {
-        "title": 3.0,
-        "heading": 2.5,
-        "code": 2.0,
-        "content": 1.0,
-        "filename": 1.5
+    "doctrine": {
+      "name": "Doctrine",
+      "version": "2.17",
+      "docsPath": "docs/doctrine",
+      "categories": [
+        "getting-started",
+        "entities",
+        "queries",
+        "orm",
+        "events",
+        "cache",
+        "transactions"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".rst"
+      ]
+    },
+    "mysql": {
+      "name": "MySQL",
+      "version": "8.0",
+      "docsPath": "docs/mysql",
+      "categories": [
+        "queries",
+        "optimization",
+        "security",
+        "administration",
+        "json",
+        "indexes",
+        "procedures",
+        "triggers"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".sql"
+      ]
+    },
+    "javascript": {
+      "name": "JavaScript",
+      "version": "ES2023",
+      "docsPath": "docs/javascript",
+      "categories": [
+        "syntax",
+        "async",
+        "classes",
+        "modules",
+        "dom",
+        "functions",
+        "apis"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".js"
+      ]
+    },
+    "html": {
+      "name": "HTML",
+      "version": "5",
+      "docsPath": "docs/html",
+      "categories": [
+        "forms",
+        "graphics",
+        "media",
+        "attributes",
+        "metadata"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".html"
+      ]
+    },
+    "css": {
+      "name": "CSS",
+      "version": "3",
+      "docsPath": "docs/css",
+      "categories": [
+        "layout",
+        "animations",
+        "responsive",
+        "variables",
+        "selectors"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".css"
+      ]
+    },
+    "webpack": {
+      "name": "Webpack",
+      "version": "5.89",
+      "docsPath": "docs/webpack",
+      "categories": [
+        "concepts",
+        "config",
+        "loaders",
+        "plugins",
+        "getting-started",
+        "development",
+        "production",
+        "optimization"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".js"
+      ]
+    },
+    "npm": {
+      "name": "NPM",
+      "version": "10.x",
+      "description": "Node Package Manager - Gestionnaire de paquets Node.js",
+      "docsPath": "docs/npm",
+      "categories": [
+        "basics",
+        "commands",
+        "package-json",
+        "publishing",
+        "workspaces",
+        "security"
+      ],
+      "fileExtensions": [
+        ".md",
+        ".json"
+      ]
     }
+  },
+  "correlations": {
+    "performance": [
+      "symfony",
+      "doctrine",
+      "mysql",
+      "javascript",
+      "webpack",
+      "npm"
+    ],
+    "security": [
+      "symfony",
+      "php",
+      "mysql",
+      "html",
+      "css",
+      "npm"
+    ],
+    "frontend": [
+      "html",
+      "css",
+      "javascript",
+      "webpack",
+      "npm"
+    ],
+    "backend": [
+      "symfony",
+      "php",
+      "doctrine",
+      "mysql",
+      "npm"
+    ],
+    "database": [
+      "doctrine",
+      "mysql",
+      "php"
+    ],
+    "forms": [
+      "symfony",
+      "html",
+      "css",
+      "javascript",
+      "npm"
+    ],
+    "api": [
+      "symfony",
+      "php",
+      "javascript",
+      "npm"
+    ],
+    "debugging": [
+      "symfony",
+      "php",
+      "doctrine",
+      "javascript",
+      "webpack",
+      "npm"
+    ]
+  },
+  "searchWeights": {
+    "title": 3,
+    "heading": 2.5,
+    "code": 2,
+    "content": 1,
+    "filename": 1.5
+  }
 }
